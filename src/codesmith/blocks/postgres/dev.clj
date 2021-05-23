@@ -7,7 +7,7 @@
            [io.zonky.test.db.postgres.embedded EmbeddedPostgres]))
 
 (defmethod cb/typed-block-transform
-  [:elements.block/postgres :embedded-dev]
+  [::cb/postgres :embedded-dev]
   [block-key system+profile ig-config]
   (cb/assoc-if-absent ig-config
                       ::embedded-dev
