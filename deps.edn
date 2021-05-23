@@ -1,0 +1,6 @@
+{:paths   ["src"]
+ :deps    {org.clojure/clojure       {:mvn/version "1.10.3"}
+           codesmith/blocks-postgres {:git/url "https://github.com/codesmith-gmbh/blocks-postgres.git"
+                                      :sha     "cd98afb4f732956939bffa566003e84183ac89e5"}}
+ :aliases {:dev  {:extra-paths ["dev"]}
+           :test {:extra-paths ["test"]}}}
