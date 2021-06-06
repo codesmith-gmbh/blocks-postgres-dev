@@ -14,8 +14,10 @@
                       {}))
 
 (defmethod ig/init-key ::embedded-dev
-  [_ _]
-  (let [^EmbeddedPostgres embedded-postgres (EmbeddedPostgres/start)
+  [_ {:keys [port]}]
+  (let [builder                             (EmbeddedPostgres/builder)
+        builder                             (if port (.setPort builder port) builder)
+        ^EmbeddedPostgres embedded-postgres (.start builder)
         ^HikariDataSource ds                (conn/->pool HikariDataSource {:jdbcUrl  (.getJdbcUrl embedded-postgres "postgres" "postgres")
                                                                            :password "postgres"})]
     (cbp/migrate-db! ds)
