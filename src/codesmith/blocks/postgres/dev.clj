@@ -11,7 +11,7 @@
   [block-key system+profile ig-config]
   (cb/assoc-if-absent ig-config
                       ::embedded-dev
-                      {}))
+                      (-> system+profile block-key)))
 
 (defmethod ig/init-key ::embedded-dev
   [_ {:keys [port]}]
