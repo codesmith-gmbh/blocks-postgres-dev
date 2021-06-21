@@ -1,7 +1,7 @@
 {:paths   ["src"]
  :deps    {org.clojure/clojure             {:mvn/version "1.10.3"}
            codesmith/blocks-postgres       {:git/url "https://github.com/codesmith-gmbh/blocks-postgres.git"
-                                            :sha     "f9ac61ce4501eb3addf77f25f1944380e7915c86"}
+                                            :sha     "5efaa336e660f33ad66c5aba48b526462b64f3f0"}
 
            io.zonky.test/embedded-postgres {:mvn/version "1.2.10"}}
  :aliases {:dev  {:extra-paths ["dev"]}

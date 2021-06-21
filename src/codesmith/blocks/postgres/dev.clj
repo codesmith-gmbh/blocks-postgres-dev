@@ -16,8 +16,9 @@
 (defmethod ig/init-key ::embedded-dev
   [_ _]
   (let [^EmbeddedPostgres embedded-postgres (EmbeddedPostgres/start)
-        ^HikariDataSource ds                (conn/->pool HikariDataSource {:jdbcUrl  (.getJdbcUrl embedded-postgres "postgres" "postgres")
-                                                                           :password "postgres"})]
+        ^HikariDataSource ds                (conn/->pool HikariDataSource {:jdbcUrl    (.getJdbcUrl embedded-postgres "postgres" "postgres")
+                                                                           :password   "postgres"
+                                                                           :autoCommit false})]
     (cbp/migrate-db! ds)
     {:datasource        ds
      :embedded-postgres embedded-postgres}))
