@@ -19,8 +19,9 @@
   (let [builder                             (EmbeddedPostgres/builder)
         builder                             (if port (.setPort builder port) builder)
         ^EmbeddedPostgres embedded-postgres (.start builder)
-        ^HikariDataSource ds                (conn/->pool HikariDataSource {:jdbcUrl  (.getJdbcUrl embedded-postgres "postgres" "postgres")
-                                                                           :password "postgres"})]
+        ^HikariDataSource ds                (conn/->pool HikariDataSource {:jdbcUrl    (.getJdbcUrl embedded-postgres "postgres" "postgres")
+                                                                           :password   "postgres"
+                                                                           :autoCommit false})]
     (cbp/migrate-db! ds)
     {:datasource        ds
      :embedded-postgres embedded-postgres}))
