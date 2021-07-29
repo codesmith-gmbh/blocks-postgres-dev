@@ -7,11 +7,12 @@
            [io.zonky.test.db.postgres.embedded EmbeddedPostgres]))
 
 (defmethod cb/typed-block-transform
-  [::cb/postgres :embedded-dev]
-  [block-key system+profile ig-config]
-  (cb/assoc-if-absent ig-config
-                      ::embedded-dev
-                      (-> system+profile block-key)))
+  [::cbp/postgres :embedded-dev]
+  [block-key system+profile ig-config final-subsitution]
+  [(cb/assoc-if-absent ig-config
+                       ::embedded-dev
+                       (-> system+profile block-key))
+   final-subsitution])
 
 (defmethod ig/init-key ::embedded-dev
   [_ {:keys [port]}]
@@ -33,4 +34,4 @@
   (.close datasource)
   (.close embedded-postgres))
 
-(derive ::embedded-dev ::cb/postgres)
+(derive ::embedded-dev ::cbp/postgres)
